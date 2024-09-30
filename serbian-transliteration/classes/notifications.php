@@ -60,7 +60,7 @@ class Transliteration_Notifications extends Transliteration
 		if( isset( $_GET['rstr_dimiss_adds'] ) && !empty( $_GET['rstr_dimiss_adds'] ) ){
 			$rstr_dimiss_donation = $_GET['rstr_dimiss_adds'];
 			if( $rstr_dimiss_donation == 1 ){
-				set_transient( 'serbian-transliteration-ads', time(), (60*60*24*30));
+				set_transient( 'serbian-transliteration-ads', time(), MONTH_IN_SECONDS);
 				
 				$parse_url = Transliteration_Utilities::parse_url();
 				if(!headers_sent()) {
@@ -126,7 +126,12 @@ class Transliteration_Notifications extends Transliteration
 	}
 	
 	// dimiss vote notices
-	public function display_ads() {	
+	public function display_ads() {
+		
+		if( strpos(home_url('/'), 'freelanceposlovi.com') !== false ) {
+			return;
+		}
+		
 		if(get_transient('serbian-transliteration-ads')){
 			return;
 		}
@@ -196,14 +201,14 @@ class Transliteration_Notifications extends Transliteration
 	**/
 	public function notice__ads() {
 		$parse_url = Transliteration_Utilities::parse_url();
-		$dont_disturb = esc_url( add_query_arg('rstr_dimiss_adds', '1', $parse_url['url']) );
+		$dont_disturb = add_query_arg('rstr_dimiss_adds', '1', $parse_url['url']);
 	 
 		printf(
 			'<div class="notice notice-info is-dismissible" id="ads-freelance-poslovi"><img src="'.esc_url(RSTR_ASSETS.'/img/fp-icon-80x80.png').'" alt="FreelancePoslovi.com"><h3>'.__('Find Work or %1$s in Serbia, Bosnia, Croatia, and Beyond!', 'serbian-transliteration').'</h3><p>'.__('Visit %2$s to connect with skilled professionals across the region. Whether you need a project completed or are looking for work, our platform is your gateway to successful collaboration.', 'serbian-transliteration').'</p><p>%3$s</p><a href="%4$s" class="notice-dismiss" style="text-decoration:none;"></a></div>',
 			'<a href="https://freelanceposlovi.com/" target="_blank" title="Freelance Poslovi">'.__('Hire Top Freelancers', 'serbian-transliteration').'</a>',
 			'<a href="https://freelanceposlovi.com/" target="_blank" title="Freelance Poslovi"><b>'.__('Freelance Jobs', 'serbian-transliteration').'</b></a>',
 			'<a href="https://freelanceposlovi.com/" target="_blank" class="button button-primary"><b>'.__('Join us today!', 'serbian-transliteration').'</b></a>',
-			$dont_disturb
+			esc_url( $dont_disturb )
 		);
 		
 		add_action('admin_footer', function(){ ?>
