@@ -4,7 +4,7 @@ Tags: cyrillic, latin, transliteration, latinisation, cyr2lat
 Requires at least: 5.4
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 2.0.8
+Stable tag: 2.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://www.buymeacoffee.com/ivijanstefan
@@ -108,6 +108,10 @@ It is important for you to know that any functionality in our plugin can be turn
 
 == Changelog ==
 
+= 2.0.9 =
+* Fixed bugs for the WordPress version 6.7
+* Fixed translations
+
 = 2.0.8 =
 * Support for the WordPress version 6.7
 
@@ -161,6 +165,10 @@ It is important for you to know that any functionality in our plugin can be turn
 * Added support for multilingual content and automatic language detection
 
 == Upgrade Notice ==
+
+= 2.0.9 =
+* Fixed bugs for the WordPress version 6.7
+* Fixed translations
 
 = 2.0.8 =
 * Support for the WordPress version 6.7

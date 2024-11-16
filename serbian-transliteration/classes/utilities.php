@@ -89,41 +89,75 @@ class Transliteration_Utilities {
 	}
 	
 	/*
-	 * Plugin mode
-	 * @return        array/string
-	 * @author        Ivijan-Stefan Stipic
+	 * Retrieve available plugin modes.
+	 * Returns an array of mode keys with support for WooCommerce and developer-specific settings.
+	 *
+	 * @param  string|null $mode Optional specific mode key to check.
+	 * @return array|string      Array of mode keys or specific mode key if exists.
 	 */
-	public static function plugin_mode($mode=NULL){		
+	public static function available_modes($mode = NULL) {
+		// Define available mode keys
 		$modes = [
-			'light'		=> __('Light mode (basic parts of the site)', 'serbian-transliteration'),
-			'standard'	=> __('Standard mode (content, themes, plugins, translations, menu)', 'serbian-transliteration'),
-			'advanced'	=> __('Advanced mode (content, widgets, themes, plugins, translations, menu‚ permalinks, media)', 'serbian-transliteration'),
-			'forced'	=> __('Forced transliteration (everything)', 'serbian-transliteration')
+			'light',
+			'standard',
+			'advanced',
+			'forced',
 		];
 
-		if(RSTR_WOOCOMMERCE) {
-			$modes = array_merge($modes, [
-				'woocommerce'	=> __('Only WooCommerce (It bypasses all other transliterations and focuses only on WooCommerce)', 'serbian-transliteration')
-			]);
-		}
-		
-		if( defined('RSTR_DEV_MODE') && RSTR_DEV_MODE ) {
-			$modes = array_merge($modes, [
-				'dev'	=> __('Dev Mode (Only for developers and testers)', 'serbian-transliteration')
-			]);
+		// Add WooCommerce-specific mode key if WooCommerce is enabled
+		if (RSTR_WOOCOMMERCE) {
+			$modes[] = 'woocommerce';
 		}
 
-		$modes = apply_filters('rstr_plugin_mode', $modes);
+		// Add developer mode key if in development environment
+		if (defined('RSTR_DEV_MODE') && RSTR_DEV_MODE) {
+			$modes[] = 'dev';
+		}
 
-		if($mode){
-			if(isset($modes[$mode])) {
-				return $modes[$mode];
-			}
+		// Allow filtering of mode keys
+		$modes = apply_filters('rstr_plugin_mode_key', $modes);
 
-			return [];
+		// Return specific mode key if $mode is provided
+		if ($mode) {
+			return in_array($mode, $modes, true) ? $mode : [];
 		}
 
 		return $modes;
+	}
+
+	/*
+	 * Retrieve plugin modes with descriptions.
+	 * Modes include predefined options with support for WooCommerce and developer-specific settings.
+	 *
+	 * @param  string|null $mode Optional specific mode key to retrieve.
+	 * @return array|string      Modes array with labels or specific mode description.
+	 */
+	public static function plugin_mode($mode = NULL) {
+		// Get available modes
+		$available_modes = self::available_modes();
+
+		// Map available modes to their descriptions
+		$modes = [
+			'light'     => __('Light mode (basic parts of the site)', 'serbian-transliteration'),
+			'standard'  => __('Standard mode (content, themes, plugins, translations, menu)', 'serbian-transliteration'),
+			'advanced'  => __('Advanced mode (content, widgets, themes, plugins, translations, menu, permalinks, media)', 'serbian-transliteration'),
+			'forced'    => __('Forced transliteration (everything)', 'serbian-transliteration'),
+			'woocommerce' => __('Only WooCommerce (It bypasses all other transliterations and focuses only on WooCommerce)', 'serbian-transliteration'),
+			'dev'       => __('Dev Mode (Only for developers and testers)', 'serbian-transliteration'),
+		];
+
+		// Filter the modes to include only available modes
+		$filtered_modes = array_intersect_key($modes, array_flip($available_modes));
+
+		// Allow filtering of the labeled modes
+		$filtered_modes = apply_filters('rstr_plugin_mode', $filtered_modes);
+
+		// Return specific mode description if $mode is provided
+		if ($mode) {
+			return $filtered_modes[$mode] ?? [];
+		}
+
+		return $filtered_modes;
 	}
 	
 	/*

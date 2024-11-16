@@ -31,7 +31,7 @@ final class Transliteration_Mode extends Transliteration {
 	/*
 	 * The current mode
 	 */
-	public function mode( $mode = NULL ) {
+	public function mode( $mode = NULL ) { 
 		static $mode_class = [];
 		
 		$cache_key = $mode ?? 0;
@@ -40,8 +40,8 @@ final class Transliteration_Mode extends Transliteration {
 			return $mode_class[$cache_key];
 		}
 		
-		$available_modes = array_keys( Transliteration_Utilities::plugin_mode() );
-		
+		$available_modes = Transliteration_Utilities::available_modes();
+
 		if( $mode && in_array($mode, $available_modes) ) {
 			$current_mode = $mode;
 		} else {
@@ -99,7 +99,7 @@ final class Transliteration_Mode extends Transliteration {
 	 * @contributor    Ivijan-Stefan Stipić
 	 * @version        2.0.0
 	 */
-	private function apply_filters() {
+	public function apply_filters() {
 		global $pagenow;
 		static $filters_loaded = false;
 		
