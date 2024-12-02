@@ -47,7 +47,7 @@ class Transliteration_Notifications extends Transliteration
 				
 				$parse_url = Transliteration_Utilities::parse_url();
 				if(!headers_sent()) {
-					if(wp_safe_redirect(remove_query_arg('rstr_dimiss_donation', $parse_url['url']))) {
+					if(wp_safe_redirect(remove_query_arg('rstr_dimiss_donation', $parse_url['url']), 302)) {
 						exit;
 					}
 				}
@@ -64,7 +64,7 @@ class Transliteration_Notifications extends Transliteration
 				
 				$parse_url = Transliteration_Utilities::parse_url();
 				if(!headers_sent()) {
-					if(wp_safe_redirect(remove_query_arg('rstr_dimiss_adds', $parse_url['url']))) {
+					if(wp_safe_redirect(remove_query_arg('rstr_dimiss_adds', $parse_url['url']), 302)) {
 						exit;
 					}
 				}
