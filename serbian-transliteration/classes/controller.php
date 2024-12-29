@@ -25,7 +25,7 @@ final class Transliteration_Controller extends Transliteration {
 	/*
 	 * Transliteration mode
 	 */
-	public function mode($no_redirect = false) {		
+	public function mode($no_redirect = true) {		
 		return self::cached_static('mode', function() use ($no_redirect) {
 			
 			$mode = NULL;
