@@ -1,3 +1,7 @@
+= 2.1.5 =
+* Fixed permalink problems for the new posts
+* Fixed performances for the post updates
+
 = 2.1.4 =
 * Fixed SEO module for the Google index
 
