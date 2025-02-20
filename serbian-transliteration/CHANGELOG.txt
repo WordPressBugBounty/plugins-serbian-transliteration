@@ -1,3 +1,8 @@
+= 2.2.0 =
+* NEW: Phantom Mode - ultra fast DOM-based transliteration (experimental)
+* Fixed forced transliteration
+* Improved site optimization
+
 = 2.1.8 =
 * Added support and integration for Polylang plugin
 * Improved and optimized permalink algorithm

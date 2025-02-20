@@ -9,7 +9,7 @@ final class Transliteration_Controller extends Transliteration {
 	public function __construct($actions = true) {
 		if($actions) {
 			$this->add_action('init', 'transliteration_tags_start', 1);
-			$this->add_action('shutdown', 'transliteration_tags_end', 100);
+			$this->add_action('shutdown', 'transliteration_tags_end', PHP_INT_MAX-100);
 		}
     }
 	
@@ -610,6 +610,78 @@ final class Transliteration_Controller extends Transliteration {
 
 		return $result ?: $content;
 	}
+	
+	/*
+	 * Transliterate HTML
+	 */
+	function transliterate_html($html) {
+		if (!class_exists('DOMDocument', false) || empty($html) || !is_string($html) || is_numeric($html)) {
+			return $html;
+		}
+
+		$dom = new DOMDocument();
+
+		libxml_use_internal_errors(true);
+		$dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+		libxml_clear_errors();
+
+		$xpath = new DOMXPath($dom);
+
+		// Izbegavamo tagove gde ne želimo transliteraciju
+		$skipTags = apply_filters('transliteration_html_avoid_tags', [
+			'script',
+			'style',
+			'textarea',
+			'input',
+			'select',
+			'code',
+			'pre',
+			'img',
+			'svg',
+			'image'
+		]);
+
+		// Atributi na koje se primenjuje transliteracija
+		$attributesToTransliterate = apply_filters('transliteration_html_attributes', [
+			'title',
+			'data-title',
+			'alt',
+			'placeholder',
+			'data-placeholder',
+			'aria-label',
+			'data-label',
+			'data-description'
+		], 'inherit');
+
+		// Transliteracija teksta unutar tagova, osim onih koji su na listi za izbegavanje
+		foreach ($xpath->query('//text()') as $textNode) {
+			if (!in_array($textNode->parentNode->nodeName, $skipTags)) {
+				$textNode->nodeValue = mb_convert_encoding(
+					$this->transliterate_no_html($textNode->nodeValue),
+					'HTML-ENTITIES',
+					'UTF-8'
+				);
+			}
+		}
+
+		// Transliteracija određenih atributa
+		
+		foreach ($xpath->query('//*[@' . implode(' or @', $attributesToTransliterate) . ']') as $node) {
+			foreach ($attributesToTransliterate as $attr) {
+				if ($node->hasAttribute($attr)) {
+					$node->setAttribute($attr, mb_convert_encoding(
+						$this->transliterate_no_html($node->getAttribute($attr)),
+						'HTML-ENTITIES',
+						'UTF-8'
+					));
+				}
+			}
+		}
+
+		// Vraćamo HTML sa pravilnim enkodingom
+		return mb_convert_encoding($dom->saveHTML(), 'UTF-8', 'HTML-ENTITIES');
+	}
+
 	
 	/*
 	 * PRIVATE: Allowed HTML attributes for transliteration
