@@ -256,9 +256,15 @@ final class Transliteration_Controller extends Transliteration {
 		}, $content);
 
 		// Perform the transliteration using the class map
-		if (class_exists($class_map)) {
+		if ($class_map && class_exists($class_map)) {
 			$content = $class_map::transliterate($content, 'cyr_to_lat');
 			$content = Transliteration_Sanitization::get()->lat($content, $sanitize_html);
+		}
+		
+		// Restore <head> contents back to their original form
+		if ($head_placeholders) {
+			$content = strtr($content, $head_placeholders);
+			unset($head_placeholders);
 		}
 
 		// Restore percentage format specifiers back to their original form
@@ -295,12 +301,6 @@ final class Transliteration_Controller extends Transliteration {
 		if ($style_placeholders) {
 			$content = strtr($content, $style_placeholders);
 			unset($style_placeholders);
-		}
-		
-		// Restore <head> contents back to their original form
-		if ($head_placeholders) {
-			$content = strtr($content, $head_placeholders);
-			unset($head_placeholders);
 		}
 
 		return $content;
@@ -678,7 +678,7 @@ final class Transliteration_Controller extends Transliteration {
 		// Transliteracija teksta unutar tagova, osim onih koji su na listi za izbegavanje
 		foreach ($xpath->query('//text()') as $textNode) {
 			if (!in_array($textNode->parentNode->nodeName, $skipTags)) {
-				$textNode->nodeValue = $this->transliterate_no_html($textNode->nodeValue);
+				$textNode->nodeValue = $this->transliterate($textNode->nodeValue);
 			}
 		}
 
