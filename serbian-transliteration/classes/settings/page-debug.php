@@ -2,10 +2,11 @@
     die();
 }
 $activations = get_option(RSTR_NAME . '-activation');
-$options     = get_rstr_option();
 ?><br>
 <table class="table table-sm table-striped w-100">
+<?php // Hook to extend debug table header ?>
 	<thead><?php do_action('rstr/settings/debug/table/thead'); ?></thead>
+<?php // Hook before first debug table row ?>
 	<tbody>
 		<?php do_action('rstr/settings/debug/table/tbody/start'); ?>
 		<tr>
@@ -110,7 +111,9 @@ $options     = get_rstr_option();
 		</tr>
 		<tr>
 			<td><strong><?php esc_html_e('Plugin directory path', 'serbian-transliteration'); ?></strong></td>
+<?php // Hook after last debug table row ?>
 			<td><?php echo RSTR_ROOT; ?></td>
+<?php // Hook to extend debug table footer ?>
 		</tr>
 		<?php do_action('rstr/settings/debug/table/tbody/end'); ?>
 	</tbody>
@@ -120,34 +123,6 @@ $options     = get_rstr_option();
 <div class="accordion-container">
 	<button class="accordion-link" type="button"><?php esc_html_e('Plugin settings', 'serbian-transliteration'); ?></button>
 	<div class="accordion-panel" style="padding:0;">
-		<table class="rstr-debug-table" style="width:100%; max-width:100%; text-align:left; border-collapse: collapse">
-			<tr>
-				<th style="width:35%;min-width: 165px;border: 1px solid #efefef; padding: 8px;"><?php esc_html_e('Option name', 'serbian-transliteration'); ?></th>
-				<th style="border: 1px solid #efefef; padding: 8px;"><?php esc_html_e('Value', 'serbian-transliteration'); ?></th>
-			</tr>
-			<?php foreach ($options as $key => $val) : ?>
-			<tr>
-				<td style="font-weight: 600; border: 1px solid #efefef; padding: 8px;"><?php echo esc_html($key); ?></td>
-				<td style="border: 1px solid #efefef; padding: <?php echo esc_html(is_array($val) ? 0 : 8); ?>px;">
-				<?php if (is_array($val)) : ?>
-					<table class="rstr-debug-table-iner" style="width:100%; max-width:100%; text-align:left; padding:0; margin:0; border-collapse: collapse;">
-						<tr>
-							<th style="width:50%;border: 1px solid #efefef; padding: 8px;"><?php esc_html_e('Key', 'serbian-transliteration'); ?></th>
-							<th style="border: 1px solid #efefef; padding: 8px;"><?php esc_html_e('Value', 'serbian-transliteration'); ?></th>
-						</tr>
-						<?php foreach ($val as $i => $prop) : ?>
-						<tr>
-							<td style="border: 1px solid #efefef; padding: 8px;"><?php echo esc_html($i); ?></td>
-							<td style="border: 1px solid #efefef; padding: 8px;"><?php echo esc_html($prop); ?></td>
-						</tr>
-						<?php endforeach; ?>
-					</table>
-				<?php else: ?>
-					<?php echo esc_html($val); ?>
-				<?php endif; ?>
-				</td>
-			</tr>
-			<?php endforeach; ?>
-		</table>
+		<?php Transliteration_Utilities::debug_render_all_settings_fields('html'); ?>
 	</div>
 </div>

@@ -320,26 +320,29 @@ final class Transliteration_Settings extends Transliteration
 	<div id="poststuff" class="metabox-holder has-right-sidebar">
 		<div class="inner-sidebar">
 			<div id="side-sortables" class="meta-box-sortables">
-				<?php
-                    do_action('transliteration-settings-before-sidebar', 'general', $this);
-        do_meta_boxes('transliteration-settings', 'side', null);
-        do_action('transliteration-settings-after-sidebar', 'general', $this);
-        ?>
+			<?php
+				// Hook triggered before settings sidebar
+				do_action('transliteration-settings-before-sidebar', 'general', $this);
+				do_meta_boxes('transliteration-settings', 'side', null);
+				// Hook triggered after settings sidebar
+				do_action('transliteration-settings-after-sidebar', 'general', $this);
+			?>
 			</div>
 		</div>
 		<div id="post-body">
 			<div id="post-body-content">
 				<form method="post" action="options.php">
 					<?php
-            settings_fields('transliteration-group');
-        do_settings_sections('serbian-transliteration');
-        submit_button(
-            __('Save Changes'),
-            'primary',
-            'trasnliteration_settings_save_changes_1',
-            false,
-            ['id' => 'trasnliteration_settings_submit_button_1']
-        ); ?>
+						settings_fields('transliteration-group');
+						do_settings_sections('serbian-transliteration');
+						submit_button(
+							__('Save Changes'),
+							'primary',
+							'trasnliteration_settings_save_changes_1',
+							false,
+							['id' => 'trasnliteration_settings_submit_button_1']
+						);
+					?>
 					<div id="trasnliteration_settings_submit_button_float">
 						<?php submit_button(
 						    __('Save Changes'),
@@ -394,8 +397,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		<div class="inner-sidebar">
 			<div id="side-sortables" class="meta-box-sortables">
 				<?php
+// Hook triggered before settings sidebar
                     do_action('transliteration-settings-before-sidebar', 'shortcodes', $this);
         do_meta_boxes('transliteration-settings', 'side', null);
+// Hook triggered after settings sidebar
         do_action('transliteration-settings-after-sidebar', 'shortcodes', $this);
         ?>
 			</div>
@@ -430,8 +435,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		<div class="inner-sidebar">
 			<div id="side-sortables" class="meta-box-sortables">
 				<?php
+// Hook triggered before settings sidebar
                     do_action('transliteration-settings-before-sidebar', 'functions', $this);
         do_meta_boxes('transliteration-settings', 'side', null);
+// Hook triggered after settings sidebar
         do_action('transliteration-settings-after-sidebar', 'functions', $this);
         ?>
 			</div>
@@ -466,8 +473,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		<div class="inner-sidebar">
 			<div id="side-sortables" class="meta-box-sortables">
 				<?php
+// Hook triggered before settings sidebar
                     do_action('transliteration-settings-before-sidebar', 'tags', $this);
         do_meta_boxes('transliteration-settings', 'side', null);
+// Hook triggered after settings sidebar
         do_action('transliteration-settings-after-sidebar', 'tags', $this);
         ?>
 			</div>
@@ -511,8 +520,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		<div class="inner-sidebar">
 			<div id="side-sortables" class="meta-box-sortables">
 				<?php
+// Hook triggered before settings sidebar
                     do_action('transliteration-settings-before-sidebar', 'transliteration', $this);
         do_meta_boxes('transliteration-tools', 'side', null);
+// Hook triggered after settings sidebar
         do_action('transliteration-settings-after-sidebar', 'transliteration', $this);
         ?>
 			</div>
@@ -540,8 +551,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		<div class="inner-sidebar">
 			<div id="side-sortables" class="meta-box-sortables">
 				<?php
+// Hook triggered before settings sidebar
                     do_action('transliteration-settings-before-sidebar', 'permalinks', $this);
         do_meta_boxes('transliteration-tools', 'side', null);
+// Hook triggered after settings sidebar
         do_action('transliteration-settings-after-sidebar', 'permalinks', $this);
         ?>
 			</div>
@@ -576,8 +589,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		<div class="inner-sidebar">
 			<div id="side-sortables" class="meta-box-sortables">
 				<?php
+// Hook triggered before settings sidebar
                     do_action('transliteration-settings-before-sidebar', 'debug', $this);
         do_meta_boxes('transliteration-settings', 'side', null);
+// Hook triggered after settings sidebar
         do_action('transliteration-settings-after-sidebar', 'debug', $this);
         ?>
 			</div>
@@ -604,8 +619,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		<div class="inner-sidebar">
 			<div id="side-sortables" class="meta-box-sortables">
 				<?php
+// Hook triggered before settings sidebar
                     do_action('transliteration-settings-before-sidebar', 'credits', $this);
         do_meta_boxes('transliteration-credits', 'side', null);
+// Hook triggered after settings sidebar
         do_action('transliteration-settings-after-sidebar', 'credits', $this);
         ?>
 			</div>

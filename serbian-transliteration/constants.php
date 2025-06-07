@@ -1,6 +1,8 @@
 <?php if ( !defined('WPINC') ) die();
 
-// Find wp-admin file path
+/**
+ * Absolute path to the wp-admin directory.
+ */
 if (!defined('WP_ADMIN_DIR')) {
     // Default wp-admin directory
     $wp_admin_dir = ABSPATH . 'wp-admin';
@@ -15,7 +17,9 @@ if (!defined('WP_ADMIN_DIR')) {
     define('WP_ADMIN_DIR', rtrim($wp_admin_dir, '/\\'));
 }
 
-// Include Dependency
+/**
+ * Include plugin dependencies when plugin.php is accessible.
+ */
 $include_dependency = false;
 if (!function_exists('is_plugin_active_for_network') || !function_exists('is_plugin_active')) {
     if (file_exists(WP_ADMIN_DIR . '/includes/plugin.php')) {
@@ -27,39 +31,39 @@ if (!function_exists('is_plugin_active_for_network') || !function_exists('is_plu
 /*
  * Main plugin constants
  * @since     1.0.0
- * @verson    1.0.0
+ * @version   1.0.0
 */
 
-// Plugin basename
+/** Plugin basename used for activation checks. */
 if (!defined('RSTR_BASENAME')) {
     define('RSTR_BASENAME', plugin_basename(RSTR_FILE));
 }
-// Plugin root
+/** Absolute path to the plugin root directory. */
 if (!defined('RSTR_ROOT')) {
     define('RSTR_ROOT', rtrim(plugin_dir_path(RSTR_FILE) , '/'));
 }
-// Plugin URL root
+/** Base URL to the plugin directory. */
 if (!defined('RSTR_URL')) {
     define('RSTR_URL', rtrim(plugin_dir_url(RSTR_FILE) , '/'));
 }
-// Assets URL
+/** URL to plugin assets directory. */
 if (!defined('RSTR_ASSETS')) {
     define('RSTR_ASSETS', RSTR_URL . '/assets');
 }
-// Classes
+/** Directory containing plugin classes. */
 if (!defined('RSTR_CLASSES')) {
     define('RSTR_CLASSES', RSTR_ROOT . '/classes');
 }
-// Plugin name
+/** Option name used for storing plugin settings. */
 if (!defined('RSTR_NAME')) {
     define('RSTR_NAME', 'serbian-transliteration');
 }
-// Plugin table
+/** Database table slug for plugin tables. */
 if (!defined('RSTR_TABLE')) {
     define('RSTR_TABLE', 'serbian_transliteration');
 }
 
-// Current plugin version ( if change, clear also session cache )
+/** Plugin version derived from the header comment. */
 if (function_exists('get_file_data') && $plugin_data = get_file_data(RSTR_FILE, array(
     'Version' => 'Version'
 ) , false)) {
@@ -73,24 +77,21 @@ if (!$rstr_version && preg_match('/\*[\s\t]+?version:[\s\t]+?([0-9.]+)/i', file_
 if (!defined('RSTR_VERSION')) {
     define('RSTR_VERSION', $rstr_version);
 }
-// Plugin session prefix (controlled by version)
+/** Prefix used for transients and cache entries. */
 if (!defined('RSTR_PREFIX')) {
     define('RSTR_PREFIX', RSTR_TABLE . '_' . preg_replace("~[^0-9]~Ui", '', RSTR_VERSION) . '_');
 }
-// Is multisite
+/** True when plugin is network activated. */
 if (!defined('RSTR_MULTISITE')) {
     define('RSTR_MULTISITE', function_exists('is_plugin_active_for_network') ? is_plugin_active_for_network(RSTR_BASENAME) : false);
 }
-if (!defined('RSTR_MULTISITE')) {
-    define('RSTR_MULTISITE', false);
-}
 
-// Is Woocommerce exists
+/** Indicates whether WooCommerce is active. */
 if (!defined('RSTR_WOOCOMMERCE')) {
     define('RSTR_WOOCOMMERCE', (function_exists('is_plugin_active') ? is_plugin_active('woocommerce/woocommerce.php') : false));
 }
 
-// Normalize Latin String map
+/** Mapping of Unicode characters to ASCII equivalents. */
 if (!defined('RSTR_NORMALIZE_LATIN_STRING_MAP')) {
 	define('RSTR_NORMALIZE_LATIN_STRING_MAP', array(
 		'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Ă'=>'A', 'Ā'=>'A', 'Ą'=>'A', 'Æ'=>'A', 'Ǽ'=>'A',
@@ -164,14 +165,15 @@ if (!defined('RSTR_NORMALIZE_LATIN_STRING_MAP')) {
 		'ძ' => 'dz', 'Ძ' => 'Dz', 'წ' => 'ts', 'Წ' => 'Ts', 'ჭ' => 'tch', 'Ჭ' => 'Tch',
 		'ხ' => 'kh', 'Ხ' => 'Kh', 'ჯ' => 'j', 'Ჯ' => 'J', 'ჰ' => 'h', 'Ჰ' => 'H',
 
-		'“'=>'"', '”'=>'"', '‘'=>"'", '’'=>"'", '•'=>'-', '…'=>'...', '—'=>'-', '–'=>'-', '¿'=>'?', '¡'=>'!', '°'=>__(' degrees ', 'serbian-transliteration'),
+		'“'=>'"', '”'=>'"', '‘'=>"'", '’'=>"'", '•'=>'-', '…'=>'...', '—'=>'-', '–'=>'-', '¿'=>'?', '¡'=>'!',
+		'°'=>'%%degrees%%',
 		'¼'=>' 1/4 ', '½'=>' 1/2 ', '¾'=>' 3/4 ', '⅓'=>' 1/3 ', '⅔'=>' 2/3 ', '⅛'=>' 1/8 ', '⅜'=>' 3/8 ', '⅝'=>' 5/8 ', '⅞'=>' 7/8 ',
-		'÷'=>__(' divided by ', 'serbian-transliteration'), '×'=>__(' times ', 'serbian-transliteration'), '±'=>__(' plus-minus ', 'serbian-transliteration'), '√'=>__(' square root ', 'serbian-transliteration'),
-		'∞'=>__(' infinity ', 'serbian-transliteration'), '≈'=>__(' almost equal to ', 'serbian-transliteration'), '≠'=>__(' not equal to ', 'serbian-transliteration'), 
-		'≡'=>__(' identical to ', 'serbian-transliteration'), '≤'=>__(' less than or equal to ', 'serbian-transliteration'), '≥'=>__(' greater than or equal to ', 'serbian-transliteration'),
-		'←'=>__(' left ', 'serbian-transliteration'), '→'=>__(' right ', 'serbian-transliteration'), '↑'=>__(' up ', 'serbian-transliteration'), '↓'=>__(' down ', 'serbian-transliteration'),
-		'↔'=>__(' left and right ', 'serbian-transliteration'), '↕'=>__(' up and down ', 'serbian-transliteration'), '℅'=>__(' care of ', 'serbian-transliteration'), 
-		'℮' => __(' estimated ', 'serbian-transliteration'), 'Ω'=>__(' ohm ', 'serbian-transliteration'), '♀'=>__(' female ', 'serbian-transliteration'), '♂'=>__(' male ', 'serbian-transliteration'),
-		'©'=>__(' Copyright ', 'serbian-transliteration'), '®'=>__(' Registered ', 'serbian-transliteration'), '™' =>__(' Trademark ', 'serbian-transliteration'),
+		'÷'=>'%%divided_by%%', '×'=>'%%times%%', '±'=>'%%plus_minus%%', '√'=>'%%square_root%%',
+		'∞'=>'%%infinity%%', '≈'=>'%%almost_equal%%', '≠'=>'%%not_equal%%', 
+		'≡'=>'%%identical%%', '≤'=>'%%less_equal%%', '≥'=>'%%greater_equal%%',
+		'←'=>'%%left%%', '→'=>'%%right%%', '↑'=>'%%up%%', '↓'=>'%%down%%',
+		'↔'=>'%%left_right%%', '↕'=>'%%up_down%%', '℅'=>'%%care_of%%', 
+		'℮'=>'%%estimated%%', 'Ω'=>'%%ohm%%', '♀'=>'%%female%%', '♂'=>'%%male%%',
+		'©'=>'%%copyright%%', '®'=>'%%registered%%', '™'=>'%%trademark%%',
 	));
 }

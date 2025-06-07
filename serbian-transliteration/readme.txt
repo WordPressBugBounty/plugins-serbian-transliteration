@@ -4,7 +4,7 @@ Tags: cyrillic, latin, transliteration, latinisation, cyr2lat
 Requires at least: 5.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 2.3.2
+Stable tag: 2.3.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -66,11 +66,13 @@ We also do special compatible functions with:
  &#9989; [Themify](https://themify.me/)
  &#9989; [Divi](https://www.elegantthemes.com/gallery/divi/) (Theme & Builder)
 
-**It's crucial to understand** that while our plugin is compatible with most others, the sheer diversity of WordPress installations and the thousands of available plugins mean there's a small chance of encountering conflicts. We strive to ensure maximum compatibility, but given the vast number of variables, we can't guarantee flawless operation in all instances. If you experience issues, they may stem from incompatibility with other plugins. We encourage you to reach out to us or the respective plugin authors for resolution. Regularly updating all your plugins and your WordPress installation is the most common solution for most problems.
+**It's important to understand** that while our plugin is compatible with most others, the sheer diversity of WordPress installations and thousands of available plugins means there is always a small chance of encountering conflicts. We strive to ensure maximum compatibility, but given the vast number of variables, flawless operation in all environments cannot be guaranteed. If you experience any issues, they may be caused by incompatibility with another plugin. In such cases, we encourage you to reach out to us or the respective plugin authors for assistance. Keeping all your plugins and WordPress installation up to date is often the simplest and most effective way to resolve unexpected behavior.
 
-This plugin can also serve as an alternative to [SrbTransLatin](https://wordpress.org/plugins/srbtranslatin/), [Cyr-To-Lat](https://wordpress.org/plugins/cyr2lat/), [Allow Cyrillic Usernames](https://wordpress.org/plugins/allow-cyrillic-usernames/), [Filenames to latin](https://wordpress.org/plugins/filenames-to-latin/), [Cyrillic Permalinks](https://wordpress.org/plugins/cyrillic-slugs/), [Latin Now!](https://wordpress.org/plugins/latin-now/), [Cyr to Lat enhanced](https://wordpress.org/plugins/cyr3lat/), [Cyrlitera](https://wordpress.org/plugins/cyrlitera/), [Geo to Lat](https://wordpress.org/plugins/geo-to-lat/), [srlatin](https://sr.wordpress.org/files/2018/12/srlatin.zip) and other similar plugins. We have managed to combine all the necessary functionalities into one plugin, but if you want to have all the separate functions, we invite you to use some of these excellent plugins.
+This plugin provides a unified and modern solution that covers the functionality typically offered by multiple separate plugins, such as [SrbTransLatin](https://wordpress.org/plugins/srbtranslatin/), [Cyr-To-Lat](https://wordpress.org/plugins/cyr2lat/), [Allow Cyrillic Usernames](https://wordpress.org/plugins/allow-cyrillic-usernames/), [Filenames to Latin](https://wordpress.org/plugins/filenames-to-latin/), [Cyrillic Permalinks](https://wordpress.org/plugins/cyrillic-slugs/), [Latin Now!](https://wordpress.org/plugins/latin-now/), [Cyrillic 2 Latin](https://wordpress.org/plugins/cyrillic2latin/), [Cyr to Lat Enhanced](https://wordpress.org/plugins/cyr3lat/), [HyToLat](https://wordpress.org/plugins/hytolat/), [Cyrlitera](https://wordpress.org/plugins/cyrlitera/), [Arabic to Latin](https://wordpress.org/plugins/arabic-to-lat/), [Geo to Lat](https://wordpress.org/plugins/geo-to-lat/), [RusToLat](https://wordpress.org/plugins/sp-rtl-rus-to-lat/) and [srlatin](https://sr.wordpress.org/files/2018/12/srlatin.zip).
 
-It is important for you to know that any functionality in our plugin can be turned off if you do not need it, as well as the ability to filter certain hooks and filters. We have tried to provide maximum flexibility and compatibility to everyone.
+Instead of relying on multiple separate tools, this all-in-one plugin brings together everything you need in a single, lightweight package - without compromising performance or flexibility.
+
+Every feature in this plugin can be selectively enabled or disabled based on your needs. Additionally, developers can make use of available filters and hooks to further customize behavior. We've designed this plugin with flexibility and compatibility in mind.
 
 == Installation ==
 
@@ -106,6 +108,15 @@ It is important for you to know that any functionality in our plugin can be turn
 9. Automated test
 
 == Changelog ==
+
+= 2.3.3 =
+* Fixed domain was triggered too early
+* Fixed admin transliteration
+* Improved debugging
+* Added transliteration for js-composer
+* Improved plugin speed
+* Improved PHP code
+* Improved transliterations
 
 = 2.3.2 =
 * Fixed Wp Admin transliteration
@@ -245,6 +256,15 @@ It is important for you to know that any functionality in our plugin can be turn
 * Added support for multilingual content and automatic language detection
 
 == Upgrade Notice ==
+
+= 2.3.3 =
+* Fixed domain was triggered too early
+* Fixed admin transliteration
+* Improved debugging
+* Added transliteration for js-composer
+* Improved plugin speed
+* Improved PHP code
+* Improved transliterations
 
 = 2.3.2 =
 * Fixed Wp Admin transliteration
