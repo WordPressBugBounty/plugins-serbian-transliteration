@@ -297,7 +297,7 @@ class Transliteration_Settings_Fields
             'transliteration_search_settings'
         );
 
-        if (Transliteration_Utilities::get_locale() == 'sr_RS') {
+        if (Transliteration_Utilities::get_locale('sr_RS')) {
             add_settings_field(
                 'fix-diacritics', // ID
                 __('Fix Diacritics', 'serbian-transliteration'), // Title

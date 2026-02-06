@@ -75,6 +75,10 @@ final class Transliteration_Controller extends Transliteration
             if (Transliteration_Utilities::is_sitemap()) {
                 return $mode;
             }
+			
+			if (!Transliteration_Utilities::is_admin() && !Transliteration_Utilities::is_cyrillic_locale()) {
+				return null;
+			}
 
             if (Transliteration_Utilities::is_admin()) {
                 return 'cyr_to_lat';
@@ -585,6 +589,10 @@ final class Transliteration_Controller extends Transliteration
      */
     public function transliteration_tags_callback($buffer)
 	{
+		if (!Transliteration_Utilities::is_cyrillic_locale()) {
+			return $buffer;
+		}
+	
 		if (Transliteration_Utilities::can_transliterate($buffer) || Transliteration_Utilities::is_editor()) {
 			return $buffer;
 		}
