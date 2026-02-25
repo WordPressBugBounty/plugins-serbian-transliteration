@@ -1034,31 +1034,42 @@ class Transliteration_Utilities
     }
 
     /*
-     * Delete all plugin translations
+     * Delete compiled translation overrides so WordPress can load fresh files after updates
      * @return        bool
      * @author        Ivijan-Stefan Stipic
      */
     public static function clear_plugin_translations(): bool
     {
-        $domain_paths = [
-            path_join(WP_LANG_DIR, 'plugins') . '/serbian-transliteration-*.{po,mo,l10n.php}',
-            path_join(dirname(RSTR_ROOT), '') . '/serbian-transliteration-*.{po,mo,l10n.php}',
-            path_join(WP_LANG_DIR, '') . '/serbian-transliteration-*.{po,mo,l10n.php}',
-        ];
+        $domain = 'serbian-transliteration';
 
-        $deleted_files = 0;
+        // Unload active textdomain if loaded
+        if (function_exists('is_textdomain_loaded') && is_textdomain_loaded($domain)) {
+            unload_textdomain($domain);
+        }
 
-        foreach ($domain_paths as $pattern) {
-            foreach (glob($pattern, GLOB_BRACE) as $file) {
-                if (@unlink($file)) {
-                    $deleted_files++;
-                } else {
-                    error_log(sprintf(__('Failed to delete plugin translation: %s', 'serbian-transliteration'), $file));
+        $lang_dir = trailingslashit(WP_LANG_DIR) . 'plugins/';
+
+        // Delete both classic MO files and newer l10n.php files
+        $extensions = ['mo', 'l10n.php', 'po'];
+
+        $deleted = 0;
+
+        foreach ($extensions as $ext) {
+            $pattern = $lang_dir . $domain . '-*.' . $ext;
+            $files = glob($pattern);
+
+            if (empty($files)) {
+                continue;
+            }
+
+            foreach ($files as $file) {
+                if (is_string($file) && is_file($file) && is_writable($file) && @unlink($file)) {
+                    $deleted++;
                 }
             }
         }
 
-        return $deleted_files > 0;
+        return $deleted > 0;
     }
 
     /*
