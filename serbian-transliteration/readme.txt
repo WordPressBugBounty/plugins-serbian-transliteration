@@ -4,7 +4,7 @@ Tags: cyrillic, latin, transliteration, latinisation, cyr2lat
 Requires at least: 5.4
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.5.0
+Stable tag: 2.5.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,6 +89,11 @@ Make your multilingual content readable, searchable, and SEO-friendly - **Transl
 
 == Changelog ==
 
+= 2.5.1 =
+* Fixed woocommerce problems with missing transliterations
+* Fixed the order of transliteration
+* Fixed excluded transliterations
+
 = 2.5.0 =
 * Added JavaScript dynamic transliteration for AJAX and frontend content
 * Fixed Latin to Cyrillic and Cyrillic to Latin inconsistencies
@@ -124,6 +129,11 @@ Make your multilingual content readable, searchable, and SEO-friendly - **Transl
 * Fixed gettext problems
 
 == Upgrade Notice ==
+
+= 2.5.1 =
+* Fixed woocommerce problems with missing transliterations
+* Fixed the order of transliteration
+* Fixed excluded transliterations
 
 = 2.5.0 =
 * Added JavaScript dynamic transliteration for AJAX and frontend content
