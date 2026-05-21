@@ -1,10 +1,10 @@
 ﻿=== Transliterator – Multilingual and Multi-script Text Conversion ===
 Contributors: ivijanstefan, creativform, tihi
 Tags: cyrillic, latin, transliteration, latinisation, cyr2lat
-Requires at least: 5.4
-Tested up to: 6.9
+Requires at least: 6.0
+Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.5.1
+Stable tag: 2.5.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,6 +89,9 @@ Make your multilingual content readable, searchable, and SEO-friendly - **Transl
 
 == Changelog ==
 
+= 2.5.2 =
+* WordPress 7.0 compatibility
+
 = 2.5.1 =
 * Fixed woocommerce problems with missing transliterations
 * Fixed the order of transliteration
@@ -129,6 +132,9 @@ Make your multilingual content readable, searchable, and SEO-friendly - **Transl
 * Fixed gettext problems
 
 == Upgrade Notice ==
+
+= 2.5.2 =
+* WordPress 7.0 compatibility
 
 = 2.5.1 =
 * Fixed woocommerce problems with missing transliterations
