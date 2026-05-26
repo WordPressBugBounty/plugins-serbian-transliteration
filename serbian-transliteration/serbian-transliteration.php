@@ -3,8 +3,9 @@
 /**
  * Plugin Name:       Transliterator – Multilingual and Multi-script Text Conversion
  * Plugin URI:        https://wordpress.org/plugins/serbian-transliteration/
- * Description:       All-in-one Cyrillic to Latin transliteration plugin for WordPress. Supports Slavic, Arabic, Greek, and Central Asian scripts.
- * Version:           2.5.2
+ * Donate link:       https://ko-fi.com/ivijanstefanstipic
+ * Description:       Universal WordPress transliteration for multilingual and non-Latin URLs, permalinks, media, search and full site content into SEO-friendly readable text.
+ * Version:           2.5.3
  * Requires at least: 6.0
  * Tested up to:      7.0
  * Requires PHP:      7.4
