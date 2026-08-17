@@ -5,9 +5,9 @@
  * Plugin URI:        https://wordpress.org/plugins/serbian-transliteration/
  * Donate link:       https://ko-fi.com/ivijanstefanstipic
  * Description:       Universal WordPress transliteration for multilingual and non-Latin URLs, permalinks, media, search and full site content into SEO-friendly readable text.
- * Version:           2.5.5
+ * Version:           2.5.6
  * Requires at least: 6.0
- * Tested up to:      7.0
+ * Tested up to:      7.1
  * Requires PHP:      7.4
  * Author:            Ivijan-Stefan Stipić
  * Author URI:        https://profiles.wordpress.org/ivijanstefan/
