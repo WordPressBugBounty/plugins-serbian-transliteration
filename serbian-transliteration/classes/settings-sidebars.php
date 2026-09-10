@@ -36,7 +36,9 @@ class Transliteration_Settings_Sidebars
 			<?php /* printf('<li><b>%s</b>: %s</li>', esc_html__('PayPal', 'serbian-transliteration'), 'creativform@gmail.com');*/ ?>
 		</ul>
 		<hr>
-		<?php printf('<p>%s</p>', __('Thank you for your support.', 'serbian-transliteration'));
+		<?php printf('<p>%s</p>', __('Thank you for your support.', 'serbian-transliteration')); ?>
+		<p><a class="button button-primary" href="<?php echo esc_url('https://ko-fi.com/ivijanstefanstipic'); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e('Support via Ko-fi', 'serbian-transliteration'); ?></a></p>
+        <?php
     }
 
     public function contributors(): void
