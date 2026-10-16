@@ -675,7 +675,12 @@ class Transliteration_Utilities
         }
 
         // Set the cookie
-        setcookie('rstr_script', $val, ['expires' => $expire, 'path' => COOKIEPATH, 'domain' => COOKIE_DOMAIN]);
+        if (!setcookie('rstr_script', $val, ['expires' => $expire, 'path' => COOKIEPATH, 'domain' => COOKIE_DOMAIN])) {
+            return false;
+        }
+
+        // Keep the active script available during the current request.
+        $_COOKIE['rstr_script'] = (string) $val;
 
         // Send no-cache headers if available
         if (function_exists('nocache_headers')) {

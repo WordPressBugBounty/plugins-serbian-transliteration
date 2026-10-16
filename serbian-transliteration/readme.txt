@@ -4,7 +4,7 @@ Tags: cyrillic, latin, transliteration, latinisation, cyr2lat
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.5.10
+Stable tag: 2.5.11
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,6 +89,9 @@ Make your multilingual content readable, searchable, and SEO-friendly - **Transl
 
 == Changelog ==
 
+= 2.5.11 =
+* Fixed first-visit script initialization and navigation labels so the correct alternate script is offered immediately without requiring a refresh.
+
 = 2.5.10 =
 * Fixed forced Cyrillic-to-Latin output corrupting URL-bearing attributes; href, src, srcset, external scripts, stylesheets, and inline JavaScript URL assignments are now preserved correctly.
 * Added focused regression coverage for URL placeholders and visible body-text transliteration.
@@ -171,6 +174,9 @@ Make your multilingual content readable, searchable, and SEO-friendly - **Transl
 * Fixed gettext problems
 
 == Upgrade Notice ==
+
+= 2.5.11 =
+* Ensures first-visit script state and navigation labels are correct immediately without requiring a refresh.
 
 = 2.5.10 =
 * Preserves URL-bearing attributes, external resources, and inline JavaScript URL assignments during forced Cyrillic-to-Latin transliteration.
