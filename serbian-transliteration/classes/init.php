@@ -46,6 +46,10 @@ final class Transliteration_Init extends Transliteration
 
     public function hook_init(): void
     {
+		if (Transliteration_Utilities::is_elementor_editor()) {
+			return;
+		}
+
         // ----------------------------
         // Main classes
         // ----------------------------
@@ -62,6 +66,7 @@ final class Transliteration_Init extends Transliteration
             'Transliteration_Tools',
             'Transliteration_Shortcodes',
             'Transliteration_Blocks',
+			'Transliteration_Site_Health'
         ]);
 
         if (!is_array($main_classes)) {
@@ -161,6 +166,10 @@ final class Transliteration_Init extends Transliteration
         if (function_exists('wp_doing_ajax') && wp_doing_ajax()) {
             return;
         }
+		
+		if (Transliteration_Utilities::is_elementor_editor()) {
+			return;
+		}
 
         $url_selector = (string) get_rstr_option('url-selector', 'rstr');
 
